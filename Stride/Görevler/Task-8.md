@@ -52,14 +52,17 @@ echo "$(curl -s ifconfig.me)$(grep -A 6 "\[grpc\]" ~/.stride/config/app.toml | e
 > Tekrar ifade ediyorum; bu işlemleri tokensiz yapamazsınız, cüzdanınızda tokeniniz mutlaka olmalıdır.
 
 ## Değişkenlerin Ayarlamasını Yapalım
-```
-RELAYER_ID='discord#1234'                                                       # Discord id'nizi yazabilirsiniz.
-STRIDE_RPC_ADDR='buraya stride rpc öğrenme komutunun çıktısını yazacaksınız'    # Az önce kopyaladığımız Stride RPC yazın
-GAIA_RPC_ADDR='buraya gaia rpc öğrenme komutunun çıktısını yazacaksınız'        # Az önce kopyaladığımız Gaia RPC yazın
-```
-**Örneğin;**
+> RPC-GRPC komutunun çıktısında bulunan sunucu ip kullanmayacağız.
+> RPC değerinizi sunucu ip + port şeklinde değil, 127.0.0.1:port şeklinde girin.
 
-![image](https://user-images.githubusercontent.com/107190154/186512948-0ab6b50a-cf56-4238-98a1-fa446663a0c5.png)
+**Örneğin;**
+`127.0.0.1:16657`
+
+```
+RELAYER_ID='discord#1234'                           # Discord id'nizi yazabilirsiniz.
+STRIDE_RPC_ADDR='127.0.0.1:RPCYAZIN'                # Stride RPC yazın
+GAIA_RPC_ADDR='127.0.0.1:RPCYAZIN'                  # Gaia RPC yazın
+```
 
 ## Sistemi Güncelleyelim.
 ```
@@ -233,6 +236,8 @@ journalctl -u relayerd -f -o cat
 
 ![rrrrrr](https://user-images.githubusercontent.com/107190154/185925166-ef5b7a75-660e-47d9-a6d8-a424c9c7f288.png)
 
+![image](https://user-images.githubusercontent.com/107190154/186985703-fde38e0d-b754-44a7-9ab5-5089e19a74e7.png)
+
 ## Kalan İşlemlere Devam Edelim
 
 **Aşağıya bıraktığım linke gidip forklama işlemi yapacağız.**
@@ -249,11 +254,12 @@ journalctl -u relayerd -f -o cat
 
 **add file dedikten sonra çıkan boşluğa şunu yapıştıralım.**
 ```
-configs/stride/chains/gaia.json
+configs/stride/chains/stride.json
 ```
 
 **Ardından şunu direkt kopyalayalım ve aşağıya inip dosyamızı oluşturalım.**
 > Stride Json
+> Cüzdan İsminiz Wallet Değilse Değiştirin.
 ```
 {
   "type": "cosmos",
@@ -278,10 +284,11 @@ configs/stride/chains/gaia.json
 **Tekrar add file diyoruz ve bu sefer şunu yapıştırıyoruz;**
 
 ```
-configs/stride/chains/stride.json
+configs/stride/chains/gaia.json
 ```
 **Ardından şunu direkt kopyalayalım ve aşağıya inip dosyamızı oluşturalım.**
 > Gaia Json
+> Cüzdan İsminiz Wallet Değilse Değiştirin.
 ```
 {
   "type": "cosmos",
